@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
   <link rel="stylesheet" href="stylesheets/github-dark.css">
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
 
   <title>Gamodeme</title>
   <meta name="description" content="">
@@ -19,7 +18,7 @@
 </head>
 
 <body>
-
+  <script src="javascripts/three.min.js"></script>
   <div class="wrapper">
     <header>
       <h1 class="title">Gamode.me</h1>
@@ -85,6 +84,40 @@ $ git checkout gh-pages
     <a href="https://github.com/Astrovicis/astrovicis.github.io/tarball/master" class="tar">tar</a><a href="https://github.com/Astrovicis/astrovicis.github.io/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
     <p class="name"></p>
   </div>
+
+  <script type="text/javascript" src="javascripts/script.js"></script>
+  <script>
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+
+
+    //our cube
+    var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    var cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+
+
+    camera.position.z = 5;
+
+    function render() {
+      requestAnimationFrame( render );
+      cube.rotation.x += 0.1;
+      cube.rotation.y += 0.1;
+      cube.position.y = Math.sin( Date.now() * 0.002 ) * 10;
+
+      camera.lookAt(cube.position)
+      renderer.render( scene, camera );
+    }
+    
+    render();
+
+    </script>
 
   
 </body>

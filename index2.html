@@ -17,10 +17,13 @@
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( renderer.domElement );
 
+
+		//our cube
 		var geometry = new THREE.BoxGeometry( 1, 1, 1 );
 		var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 		var cube = new THREE.Mesh( geometry, material );
 		scene.add( cube );
+
 
 		camera.position.z = 5;
 
@@ -28,6 +31,9 @@
 			requestAnimationFrame( render );
 			cube.rotation.x += 0.1;
 			cube.rotation.y += 0.1;
+			cube.position.y = Math.sin( Date.now() * 0.002 ) * 10;
+
+			camera.lookAt(cube.position)
 			renderer.render( scene, camera );
 		}
 		
